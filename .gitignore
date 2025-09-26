@@ -1,0 +1,13 @@
+# Don’t upload Python cache files
+__pycache__/
+*.pyc
+
+# Don’t upload large CSV or compressed files
+*.csv
+*.gz
+
+# Don’t upload secret environment variables
+.env
+
+# Don’t upload local database files
+*.db
