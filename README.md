@@ -28,70 +28,54 @@ This project demonstrates core **Data Engineering skills**:
 git clone https://github.com/GhadaFaress/nyc-taxi-data-engineering.git
 cd nyc-taxi-data-engineering
 
-2. Start Services with Docker
-
-Start all services using Docker Compose:
-
+### 2. Start Services with Docker
+* Start all services using Docker Compose:  
+```bash
 docker-compose up
+```
+* This will launch:  
+  * PostgreSQL database  
+  * pgAdmin web UI  
 
+### 3. Access Services
+* Open pgAdmin: [http://localhost:8080](http://localhost:8080)  
+* Connect to the database: `postgres:5432`  
 
-This will launch:
+### 4. Load Data into Database
+* Run the Python ingestion script to load the taxi trip data into PostgreSQL:  
+```bash
+python ingest_data.py   --user=postgres   --password=postgres   --host=localhost   --port=5432   --db=taxi   --table_name=yellow_taxi_data   --url=<data-url>
+```
 
-PostgreSQL database
-
-pgAdmin web UI
-
-3. Access Services
-
-Open pgAdmin: http://localhost:8080
-
-Connect to the database: postgres:5432
-
-4. Load Data into Database
-
-Run the Python ingestion script to load the taxi trip data into PostgreSQL:
-
-python ingest_data.py \
-  --user=postgres \
-  --password=postgres \
-  --host=localhost \
-  --port=5432 \
-  --db=taxi \
-  --table_name=yellow_taxi_data \
-  --url=<data-url>
-
-5. Run Analytics
-
-After loading the data, run the analysis script:
-
+### 5. Run Analytics
+* After loading the data, run the analysis script:  
+```bash
 python yellow_taxi_analysis.py
+```
 
-Example Query
+---
 
-Example SQL query to calculate the average fare per passenger count:
-
+## Example Query
+* Example SQL query to calculate the average fare per passenger count:  
+```sql
 SELECT passenger_count, AVG(total_amount) AS avg_amount
 FROM yellow_taxi_data
 GROUP BY passenger_count
 ORDER BY avg_amount DESC;
+```
 
-Project Highlights
+---
 
-Containerized environment for reproducibility
+## Project Highlights
+* Containerized environment for reproducibility  
+* Automated data ingestion pipeline  
+* SQL-based analytics on taxi trips  
+* Clear modular structure (ingestion + analysis)  
 
-Automated data ingestion pipeline
+---
 
-SQL-based analytics on taxi trips
-
-Clear modular structure (ingestion + analysis)
-
-Future Improvements
-
-Add Airflow for workflow orchestration
-
-Automate dataset downloads
-
-Deploy database on the cloud
-
-Build dashboards (e.g., with PowerBI or Tableau
-### 2\. Start Services with Docker * Start all services using Docker Compose: bash Copy code `docker-compose up` * This will launch: * PostgreSQL database * pgAdmin web UI ### 3\. Access Services * Open pgAdmin: [http://localhost:8080](http://localhost:8080) * Connect to the database: `
+## Future Improvements
+* Add Airflow for workflow orchestration  
+* Automate dataset downloads  
+* Deploy database on the cloud  
+* Build dashboards (e.g., with PowerBI or Tableau)  
